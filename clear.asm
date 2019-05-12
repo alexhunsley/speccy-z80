@@ -12,21 +12,20 @@ org 40000
 blocks
 ; try setting some attribs
 
-    ld b,32
-    ld HL,22528
+    ld b,32  ; attribute byte - go through all paint, Flash, Bright combos (must shift this value left three bits)
+    ld HL,22528  ; colour attribute memory start
     ld de,4  ; x stride for blocks plotted
 plot
-	ld c,b
+	ld c,b  
 	rl c
 	rl c
-	rl c
-	ld (HL),c
+	rl c    ; do attrib << 3 into c
+	ld (HL),c  ; set attrib on memory
 ;	inc HL
 ;	inc HL
 ;	inc HL
-    add hl,de
-;	dec a
-    djnz plot
+    add hl,de  ; add the x stride
+    djnz plot  ; loop on b -> 0
 
 ;    ld (0X5800),1
 ;    ld (0X5801),2
