@@ -1,7 +1,7 @@
 ; This is where your program starts in RAM.
 org 40000
 
-	;jr blocks
+	jr blocks
 ; Clear the screen to black.
     ld a,110         ; White ink (7), black paper (0), bright (64).
     ld (23693),a    ; Set our screen colours.
@@ -32,6 +32,10 @@ plot
 ;    ld (0X5801),2
 ;    ld (0X5802),3
 
+text
+;.DB "Hello",0
+DEFM 11,"HELLO WORLD"
+DEFB 0
 
 ; Pasmo needs this to know where to start running your program from.
 ; It should be the same as the address you specified at the top!
