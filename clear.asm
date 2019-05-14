@@ -21,16 +21,9 @@ plot
 	rl c    ;
 	rl c    ; do attrib << 3 into c
 	ld (HL),c  ; set attrib on memory
-;	inc HL
-;	inc HL
-;	inc HL
     add hl,de  ; add the x stride
     call pause  ; slow down the block drawing so it's visible
     djnz plot  ; loop on b -> 0
-
-;    ld (0X5800),1
-;    ld (0X5801),2
-;    ld (0X5802),3
 
 pause
       push bc   ; preserve b
