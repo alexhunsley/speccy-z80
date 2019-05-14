@@ -16,20 +16,29 @@ blocks
     ld HL,22528  ; colour attribute memory start
     ld de,4  ; x stride for blocks plotted
 plot
-	ld c,b  
-	rl c
-	rl c
+	ld c,b  ;
+	rl c    ;
+	rl c    ;
 	rl c    ; do attrib << 3 into c
 	ld (HL),c  ; set attrib on memory
 ;	inc HL
 ;	inc HL
 ;	inc HL
     add hl,de  ; add the x stride
+    call pause  ; slow down the block drawing so it's visible
     djnz plot  ; loop on b -> 0
 
 ;    ld (0X5800),1
 ;    ld (0X5801),2
 ;    ld (0X5802),3
+
+pause
+      push bc   ; preserve b
+      ld b,25            ; time to pause in 50ths of a sec
+delay halt                ; wait for next interrupt to finish being serviced
+      djnz delay          ; repeat.
+      pop bc
+      ret
 
 text
 ;.DB "Hello",0
